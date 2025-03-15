@@ -1,0 +1,131 @@
+name: salaty
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.0
+  flutter_local_notifications: ^18.0.1
+  flutter_timezone: ^4.1.0
+  flutter_screenutil: ^5.0.0+2
+  flutter_svg: ^2.0.5
+  geocoding: ^3.0.0
+  geolocator: ^13.0.2
+  google_fonts: ^6.2.1
+  hydrated_bloc: ^10.0.0
+  intl: ^0.20.2
+  lottie: ^3.3.1
+  #sensors_plus: ^6.1.1
+  path_provider: ^2.0.2
+  permission_handler: ^11.4.0
+  rxdart: ^0.28.0
+  share_plus: ^10.1.4
+  shared_preferences: ^2.0.6
+  sqflite: ^2.0.0+3
+  url_launcher: ^6.0.9
+  cached_network_image: ^3.1.0
+  cupertino_icons: ^1.0.2
+  dartz: ^0.10.0
+  dio: ^5.1.2
+  equatable: ^2.0.3
+  android_alarm_manager_plus: ^4.0.7
+
+dependency_overrides:
+  flutter_local_notifications_linux: null
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: "^0.14.3"
+  console_bars: ^1.2.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "./assets/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "./assets/logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "./assets/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "./assets/logo.png"
+
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/core/json/
+    - assets/images/core/svg/
+    - assets/images/error/lottie_json/
+    - assets/images/navigation_icon/svg/
+    - assets/images/home_icon/svg/
+    - assets/images/home_icon/lottie_json/
+    - assets/images/collection_icon/svg/
+    - assets/images/qiblat_icon/svg/
+    - assets/images/praying_time/svg/
+    - assets/images/setting_icon/svg/
+    - assets/images/error/lottie_json/
+    - assets/images/permission/lottie_json/
+    - assets/images/tasbih_icon/svg/
+    - assets/images/dua_icon/svg/
+    - assets/images/quran_icon/svg/
+    - assets/images/image_of_the_day/
+    - assets/sound/
+
+  fonts:
+    - family: Uthman
+      fonts:
+        - asset: assets/fonts/Uthman-Taha-Naskh-Regular.otf
+        - asset: assets/fonts/Uthman-Taha-Naskh-Bold.otf
+          weight: 700
+    - family: Jameel
+      fonts:
+        - asset: assets/fonts/jameel.ttf
