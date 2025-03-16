@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:vector_math/vector_math.dart' show radians;
 
-import '../../../../../core/pkg/motion_sensors/lib/motion_sensors.dart';
+import 'package:salaty/core/pkg/motion_sensors/lib/motion_sensors.dart';
 import '../../controller/qibla_controller.dart';
 
 part 'angle_event.dart';

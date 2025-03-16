@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -122,13 +123,35 @@ class DatabaseService {
 
       print(errorMessage);
 
-      return Left(
-        RemoteFailure(
-          message: errorMessage,
-          errorType: DioExceptionType.badResponse,
-          errorCode: errorCode,
-        ),
-      );
+      // Use local database file from assets if download fails
+      try {
+        ByteData data = await rootBundle.load('../../../../assets/db/db.db');
+        List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+        await File(pathName).writeAsBytes(bytes);
+
+        var result = await initService(context);
+
+        LocalFailure? localFailure;
+        Database? database;
+
+        result.fold(
+          (l) => localFailure = l,
+          (r) => database = r,
+        );
+
+        if (localFailure != null) {
+          return Left(localFailure!);
+        }
+        return Right(database!);
+      } catch (e) {
+        return Left(
+          RemoteFailure(
+            message: errorMessage,
+            errorType: DioExceptionType.badResponse,
+            errorCode: errorCode,
+          ),
+        );
+      }
     }
   }
 

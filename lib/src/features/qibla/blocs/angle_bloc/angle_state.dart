@@ -11,12 +11,12 @@ abstract class AngleState extends Equatable {
 }
 
 class AngleInitial extends AngleState {
-  AngleInitial(super.angle, super.radian);
+  const AngleInitial(super.angle, super.radian);
 }
 
 class AngleLoaded extends AngleState {
   final double qiblaDirection;
-  AngleLoaded({
+  const AngleLoaded({
     required this.qiblaDirection,
     required double angle,
     required double radian,
@@ -24,5 +24,5 @@ class AngleLoaded extends AngleState {
 }
 
 class AngleFailed extends AngleState {
-  AngleFailed(super.angle, super.radian);
+  const AngleFailed(super.angle, super.radian);
 }
