@@ -56,6 +56,7 @@ class SplashScaffold extends StatelessWidget {
                   fontSize: 16.sp,
                 ),
               )
+              //
             ],
           ),
         ),
