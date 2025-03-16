@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const String PRAYER_TIMING_URL = 'http://api.aladhan.com/v1/timings/';
 
 const String DATABASE_FILE = 'siratemustaqeem-db.db';
-const String DATABASE_URL = 'https://talhasultan.dev/assets/';
+const String DATABASE_URL = 'https://hafezcode.vercel.app/db/';
 
-const String PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.devtechnologies.siratemustaqeem';
-const WEBSITE_URL = 'https://talhasultan.dev/';
-const EMAIL_URL = 'mailto:talhasultan.dev@gmail.com?subject=Sirate%20Mustaqeem%20Query';
+const String PLAY_STORE_URL =
+    'https://play.google.com/store/apps/details?id=com.devtechnologies.siratemustaqeem';
+const WEBSITE_URL = 'https://hafezcode.vercel.app/';
+const EMAIL_URL =
+    'mailto:talhasultan.dev@gmail.com?subject=Sirate%20Mustaqeem%20Query';
 const MEDIUM_URL = 'https://medium.com/@muhammadtalhasultan';
 const YOUTUBE_URL = 'https://www.youtube.com/channel/UC-cBM3nBHd5t6BKKznR3GNg';
 const FACEBOOK_URL = 'https://www.facebook.com/groups/218761196363628';
@@ -33,9 +35,7 @@ const Color kDarkError = Color(0xFFD0524A);
 const Duration kAnimationDuration = Duration(milliseconds: 300);
 const Curve kAnimationCurve = Curves.easeInOut;
 
-EdgeInsets kPagePadding = EdgeInsets.symmetric(
-  horizontal: 16.w,
-);
+EdgeInsets kPagePadding = EdgeInsets.symmetric(horizontal: 16.w);
 
 EdgeInsets kCardPadding = EdgeInsets.symmetric(
   horizontal: 16.w,
@@ -47,13 +47,9 @@ EdgeInsets kInputFieldPadding = EdgeInsets.symmetric(
   vertical: 16.h,
 );
 
-BorderRadiusGeometry kCardBorderRadius = BorderRadius.circular(
-  16.r,
-);
+BorderRadiusGeometry kCardBorderRadius = BorderRadius.circular(16.r);
 
-BorderRadius kAppIconBorderRadius = BorderRadius.circular(
-  8.r,
-);
+BorderRadius kAppIconBorderRadius = BorderRadius.circular(8.r);
 
 BorderRadiusGeometry kBottomSheetBorderRadius = BorderRadius.only(
   topLeft: Radius.circular(16.r),

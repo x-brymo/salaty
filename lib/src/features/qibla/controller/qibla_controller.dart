@@ -21,7 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vector_math/vector_math.dart' show radians;
 
-import '../../../../core/pkg/motion_sensors/lib/motion_sensors.dart';
+import 'package:salaty/core/pkg/motion_sensors/lib/motion_sensors.dart';
 import '../blocs/angle_bloc/angle_bloc.dart';
 
 /// calculate the [bearing] towards Kaaba from user location.
