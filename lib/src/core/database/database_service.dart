@@ -110,22 +110,10 @@ class DatabaseService {
               errorType: DioExceptionType.badResponse),
         );
       }
-    } on RemoteException catch (e) {
-      String? errorMessage = e.dioError.message;
-      int? errorCode;
-
-      for (final error in RemoteErrorCode.remoteErrors) {
-        if (e.dioError.message!.contains(error['rawMessage'].toString())) {
-          errorMessage = error['message'].toString();
-          errorCode = error['errorCode'] as int;
-        }
-      }
-
-      print(errorMessage);
-
+    } catch (e) {
       // Use local database file from assets if download fails
       try {
-        ByteData data = await rootBundle.load('../../../../assets/db/db.db');
+        ByteData data = await rootBundle.load('assets/db/db.db');
         List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
         await File(pathName).writeAsBytes(bytes);
 
@@ -146,9 +134,8 @@ class DatabaseService {
       } catch (e) {
         return Left(
           RemoteFailure(
-            message: errorMessage,
+            message: e.toString(),
             errorType: DioExceptionType.badResponse,
-            errorCode: errorCode,
           ),
         );
       }
