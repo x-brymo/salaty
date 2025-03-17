@@ -2,10 +2,14 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+
 import 'routes/routes.dart';
+import 'src/core/localization/app_localizations.dart';
+import 'src/core/localization/bloc/language_bloc.dart';
 import 'src/core/notification/notification_service.dart';
 import 'src/core/util/bloc/allah_names/allah_name_bloc.dart';
 import 'src/core/util/bloc/database/database_bloc.dart';
@@ -21,6 +25,7 @@ import 'src/core/util/bloc/theme/theme_bloc.dart';
 import 'src/core/util/bloc/time_format/time_format_bloc.dart';
 import 'src/features/bottom_tab/bloc/tab/tab_bloc.dart';
 import 'src/features/quran/bloc/quran_theme/quran_theme_bloc.dart';
+import 'src/features/settings/change_language_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,40 +88,69 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LocationBloc(),
         ),
+        BlocProvider(
+          create: (context) => LanguageBloc(),
+        ),
       ],
-      child: FutureBuilder<void>(
-          future: SystemChrome.setPreferredOrientations(
-            [
-              DeviceOrientation.portraitUp,
-            ],
-          ),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return ScreenUtilInit(
-                designSize: Size(414, 896),
-                builder: (context, child) {
-                  return BlocBuilder<ThemeBloc, ThemeState>(
-                    builder: (context, state) {
-                      return MaterialApp(
-                        title: 'Salaty || صلاتي',
-                        debugShowCheckedModeBanner: false,
-                        color: Colors.white,
-                        theme: state.currentTheme,
-                        initialRoute: RouteGenerator.splash,
-                        onGenerateRoute: RouteGenerator.generateRoute,
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
+          return FutureBuilder<void>(
+              future: SystemChrome.setPreferredOrientations(
+                [
+                  DeviceOrientation.portraitUp,
+                ],
+              ),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return ScreenUtilInit(
+                    designSize: Size(414, 896),
+                    builder: (context, child) {
+                      return BlocBuilder<ThemeBloc, ThemeState>(
+                        builder: (context, themeState) {
+                          return MaterialApp(
+                            locale: state.locale,
+                            supportedLocales: [
+                              Locale('en', 'US'),
+                              Locale('ar', 'SA'),
+                            ],
+                            localizationsDelegates: [
+                              AppLocalizationsDelegate(),
+                              GlobalMaterialLocalizations.delegate,
+                              GlobalWidgetsLocalizations.delegate,
+                              GlobalCupertinoLocalizations.delegate,
+                            ],
+                            localeResolutionCallback: (locale, supportedLocales) {
+                              for (var supportedLocale in supportedLocales) {
+                                if (supportedLocale.languageCode == locale?.languageCode &&
+                                    supportedLocale.countryCode == locale?.countryCode) {
+                                  return supportedLocale;
+                                }
+                              }
+                              return supportedLocales.first;
+                            },
+                            title: context.tr('title'),
+                            debugShowCheckedModeBanner: false,
+                            theme: themeState.currentTheme,
+                            initialRoute: RouteGenerator.splash,
+                            onGenerateRoute: RouteGenerator.generateRoute,
+                            // routes: {
+                            //   '/change_language': (context) => ChangeLanguageScreen(),
+                            // },
+                          );
+                        },
                       );
                     },
                   );
-                },
-              );
-            }
-            return MaterialApp(
-              title: 'Salaty || صلاتي',
-              debugShowCheckedModeBanner: false,
-              color: Colors.white,
-              home: Container(),
-            );
-          }),
+                }
+                return MaterialApp(
+                  title: context.tr('title'),
+                  debugShowCheckedModeBanner: false,
+                  color: Colors.white,
+                  home: Container(),
+                );
+              });
+        },
+      ),
     );
   }
 }

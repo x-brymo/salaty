@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:salaty/src/core/localization/bloc/language_bloc.dart';
 
 import '../../../core/util/bloc/notification/notification_bloc.dart';
 import '../../../core/util/bloc/theme/theme_bloc.dart';
@@ -9,6 +10,7 @@ import '../../../core/util/bloc/time_format/time_format_bloc.dart';
 import '../../utils/sirat_card.dart';
 import '../controller/setting_controller.dart';
 import 'change_format_switch.dart';
+import 'change_lang.dart';
 import 'change_notification_switch.dart';
 import 'change_theme_switch.dart';
 
@@ -99,7 +101,38 @@ class UserPreferenceCard extends StatelessWidget {
                 },
               ),
             ],
-          )
+          ),
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Language',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Theme.of(context).primaryColor),
+              ),
+              BlocBuilder<LanguageBloc, LanguageState>(
+                builder: (context, state) {
+                  return ChangeLanguage(
+                    value: state.locale.languageCode == 'ar',
+                    onChanged: (_) {
+                      BlocProvider.of<LanguageBloc>(context).add(
+                        ChangeLanguageEvent(
+                          Locale(
+                            state.locale.languageCode == 'ar' ? 'en' : 'ar',
+                            state.locale.countryCode,
+                          ),
+                        ),
+                      );
+                    },  
+                  );
+                },
+              ),
+            ],
+          ),
+          
         ],
       ),
     );
