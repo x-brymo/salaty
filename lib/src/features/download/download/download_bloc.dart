@@ -14,7 +14,8 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
     on<DownloadDatabase>((event, emit) async {
       emit(DownloadLoading());
 
-      final result = await DatabaseService().downloadDatabase(event.context);
+     // final result = await DatabaseService().downloadDatabase(event.context);
+      final result = await DatabaseService().initService(event.context);
 
       result.fold(
         (l) => emit(DownloadFailed(l)),

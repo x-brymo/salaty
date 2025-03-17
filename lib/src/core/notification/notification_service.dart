@@ -22,7 +22,7 @@ class NotificationService {
 
   Future<void> init() async {
     await _configureLocalTimeZone();
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('launcher_icon'); // Ensure this matches your icon resource name
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher'); // Ensure this matches your icon resource name
     final DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
