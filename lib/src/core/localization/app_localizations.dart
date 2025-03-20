@@ -1,3 +1,4 @@
+// filepath: d:\Projects\Sirat-E-Mustaqeem-master\salaty\lib\src\core\localization\app_localizations.dart
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -34,8 +35,7 @@ class AppLocalizations {
   }
 }
 
-class AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
   @override
@@ -56,6 +56,6 @@ class AppLocalizationsDelegate
 
 extension LocalizationExtension on BuildContext {
   String tr(String key) {
-    return AppLocalizations.of(this)!.translate(key) ?? key;
+    return AppLocalizations.of(this)?.translate(key) ?? key;
   }
 }

@@ -1,3 +1,5 @@
 {
-    "dbcode.connections": []
+    "dbcode.connections": [],
+    "flutterTools.displayGetxContextMenu": false,
+    "flutterTools.displayMobxContextMenu": false
 }

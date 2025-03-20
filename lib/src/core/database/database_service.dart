@@ -16,7 +16,6 @@ import '../util/constants.dart';
 import '../util/model/dua.dart';
 import '../util/model/quran.dart';
 import '../util/model/tasbih.dart';
-import 'database_table.dart';
 
 class DatabaseService {
   Future<bool> checkIfDatabaseExist() async {
@@ -28,33 +27,50 @@ class DatabaseService {
 
   Future<Either<LocalFailure, Database>> initService(
       BuildContext context) async {
-    try {
-      final databasesPath = await getDatabasesPath();
-      final pathName = '$databasesPath/$DATABASE_FILE';
+        
+ await copyDatabaseFromAssets(); 
+  final databasesPath = await getDatabasesPath();
+  final pathName = '$databasesPath/siratemustaqeem-db.db';
 
-      final Database db = await openDatabase(pathName);
+  return Right(await openDatabase(pathName));
 
-      await DatabaseTable.cachedDataFromDb(db, context);
+    // try {
+    //   final databasesPath = await getDatabasesPath();
+    //   final pathName = '$databasesPath/$DATABASE_FILE';
 
-      return Right(db);
-    } on LocalException catch (e) {
-      return Left(
-        LocalFailure(
-          message: kReadDatabaseFailed['message'],
-          error: kReadDatabaseFailed['errorCode'] as int,
-          extraInfo: e.error,
-        ),
-      );
-    } catch (e) {
-      return Left(
-        LocalFailure(
-          message: kReadDatabaseFailed['message'],
-          error: kReadDatabaseFailed['errorCode'] as int,
-          extraInfo: e.toString(),
-        ),
-      );
-    }
+    //   final Database db = await openDatabase(pathName);
+
+    //   await DatabaseTable.cachedDataFromDb(db, context);
+
+    //   return Right(db);
+    // } on LocalException catch (e) {
+    //   return Left(
+    //     LocalFailure(
+    //       message: kReadDatabaseFailed['message'],
+    //       error: kReadDatabaseFailed['errorCode'] as int,
+    //       extraInfo: e.error,
+    //     ),
+    //   );
+    // } catch (e) {
+    //   return Left(
+    //     LocalFailure(
+    //       message: kReadDatabaseFailed['message'],
+    //       error: kReadDatabaseFailed['errorCode'] as int,
+    //       extraInfo: e.toString(),
+    //     ),
+    //   );
+    // }
+    
   }
+  Future<void> copyDatabaseFromAssets() async {
+  final databasesPath = await getDatabasesPath();
+  final pathName = '$databasesPath/db.db';
+  if (await File(pathName).exists()) return;
+  ByteData data = await rootBundle.load('assets/db/db.db');
+  List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  await File(pathName).writeAsBytes(bytes);
+}
+
 
   Future<List<Map<String, Object?>>> splitQuranQuery(Database db) async {
     final List<Map<String, Object?>> finalQurans = [];

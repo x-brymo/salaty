@@ -6,6 +6,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger_observer.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger_settings.dart';
 
 import 'routes/routes.dart';
 import 'src/core/localization/app_localizations.dart';
@@ -25,13 +27,30 @@ import 'src/core/util/bloc/theme/theme_bloc.dart';
 import 'src/core/util/bloc/time_format/time_format_bloc.dart';
 import 'src/features/bottom_tab/bloc/tab/tab_bloc.dart';
 import 'src/features/quran/bloc/quran_theme/quran_theme_bloc.dart';
-import 'src/features/settings/change_language_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
   // await init android_alarm_manager_plus
   await AndroidAlarmManager.initialize();
+  Bloc.observer = TalkerBlocObserver(
+    settings: TalkerBlocLoggerSettings(
+      enabled: true,
+      printEventFullData: false,
+      printStateFullData: false,
+      printChanges: true,
+      printClosings: true,
+      printCreations: true,
+      printEvents: true,
+      printTransitions: true,
+      // If you want log only AuthBloc transitions
+      transitionFilter: (bloc, transition) =>
+          bloc.runtimeType.toString() == 'AuthBloc',
+      // If you want log only AuthBloc events
+      eventFilter: (bloc, event) => bloc.runtimeType.toString() == 'AuthBloc',
+    ),
+  );
   final directory = await getApplicationDocumentsDirectory();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: HydratedStorageDirectory(directory.path),
@@ -107,6 +126,8 @@ class MyApp extends StatelessWidget {
                     builder: (context, child) {
                       return BlocBuilder<ThemeBloc, ThemeState>(
                         builder: (context, themeState) {
+                          // Ensure state is not null
+                          final theme = themeState.currentTheme ?? ThemeData.light();
                           return MaterialApp(
                             locale: state.locale,
                             supportedLocales: [
@@ -130,7 +151,9 @@ class MyApp extends StatelessWidget {
                             },
                             title: context.tr('title'),
                             debugShowCheckedModeBanner: false,
-                            theme: themeState.currentTheme,
+                            theme: ThemeData.dark(),
+                            themeMode: ThemeMode.system,
+                            darkTheme: ThemeData.dark(),
                             initialRoute: RouteGenerator.splash,
                             onGenerateRoute: RouteGenerator.generateRoute,
                             // routes: {
