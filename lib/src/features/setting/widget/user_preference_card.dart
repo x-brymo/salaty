@@ -46,7 +46,7 @@ class UserPreferenceCard extends StatelessWidget {
               BlocBuilder<ThemeBloc, ThemeState>(
                 builder: (context, state) {
                   return ChangeThemeSwitch(
-                      value: state.currentTheme.brightness == Brightness.dark,
+                      value: Theme.of(context).brightness == Brightness.dark,
                       onChanged: (_) {
                         BlocProvider.of<ThemeBloc>(context).add(
                           ToggleTheme(),

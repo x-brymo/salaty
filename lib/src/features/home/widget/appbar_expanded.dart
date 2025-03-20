@@ -21,7 +21,7 @@ class AppBarExpanded extends StatelessWidget {
               return SizedBox(
                 width: 1.sw,
                 height: 0.3.sh,
-                child: state.currentTheme.brightness == Brightness.dark
+                child: Theme.of(context).brightness == Brightness.dark
                     ? SvgPicture.asset(
                         'assets/images/home_icon/svg/night_mode.svg',
                         fit: BoxFit.cover,

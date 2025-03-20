@@ -25,6 +25,7 @@ import 'src/core/util/bloc/surah/surah_bloc.dart';
 import 'src/core/util/bloc/tasbih/tasbih_bloc.dart';
 import 'src/core/util/bloc/theme/theme_bloc.dart';
 import 'src/core/util/bloc/time_format/time_format_bloc.dart';
+import 'src/core/util/theme/style/a_style.dart';
 import 'src/features/bottom_tab/bloc/tab/tab_bloc.dart';
 import 'src/features/quran/bloc/quran_theme/quran_theme_bloc.dart';
 
@@ -127,7 +128,7 @@ class MyApp extends StatelessWidget {
                       return BlocBuilder<ThemeBloc, ThemeState>(
                         builder: (context, themeState) {
                           // Ensure state is not null
-                          final theme = themeState.currentTheme ?? ThemeData.light();
+                          //final theme = themeState.currentTheme ?? ThemeData.light();
                           return MaterialApp(
                             locale: state.locale,
                             supportedLocales: [
@@ -151,9 +152,9 @@ class MyApp extends StatelessWidget {
                             },
                             title: context.tr('title'),
                             debugShowCheckedModeBanner: false,
-                            theme: ThemeData.dark(),
+                            theme: AppStyle(themeIndex: themeState.currentTheme ?? 0).currentTheme,
                             themeMode: ThemeMode.system,
-                            darkTheme: ThemeData.dark(),
+                           
                             initialRoute: RouteGenerator.splash,
                             onGenerateRoute: RouteGenerator.generateRoute,
                             // routes: {

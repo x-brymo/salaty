@@ -44,6 +44,11 @@ class SuccessWidget extends StatelessWidget {
               height: 16.h,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                //Theme.of(context).primaryColor,
+                const Color(0xFF673AB7),
+              ),
               onPressed: () {
                 Navigator.of(context)
                     .pushReplacementNamed(RouteGenerator.locationPermission);

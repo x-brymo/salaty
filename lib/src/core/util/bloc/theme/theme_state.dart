@@ -1,7 +1,7 @@
 part of 'theme_bloc.dart';
 
 class ThemeState extends Equatable {
-  final ThemeData currentTheme;
+  final int currentTheme;
 
   const ThemeState(this.currentTheme);
 
