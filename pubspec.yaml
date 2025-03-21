@@ -58,6 +58,7 @@ dependencies:
   android_alarm_manager_plus: ^4.0.7
   flutter_localizations:
     sdk: flutter
+  animated_text_kit: ^4.2.3
 
 dependency_overrides:
   flutter_local_notifications_linux: null

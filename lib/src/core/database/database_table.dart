@@ -15,7 +15,9 @@ class DatabaseTable {
   static Future<void> cachedDataFromDb(
       Database db, BuildContext context) async {
     try {
+      
       List<Map<String, Object?>> allahNames = await db.query('allah_names');
+        // ✅ Debugging Log
 
       BlocProvider.of<AllahNameBloc>(context).add(
         FetchAllahName(allahNames),
@@ -29,6 +31,8 @@ class DatabaseTable {
 
       final List<Map<String, Object?>> finalQurans =
           await DatabaseService().splitQuranQuery(db);
+          print("Quran Data from DB: $finalQurans""^^^^^^^^____________^^^^^^^^^^^^"
+          );
 
       BlocProvider.of<QuranBloc>(context).add(
         FetchQuran(finalQurans),

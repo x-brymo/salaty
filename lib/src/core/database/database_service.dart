@@ -16,6 +16,7 @@ import '../util/constants.dart';
 import '../util/model/dua.dart';
 import '../util/model/quran.dart';
 import '../util/model/tasbih.dart';
+import 'database_table.dart';
 
 class DatabaseService {
   Future<bool> checkIfDatabaseExist() async {
@@ -30,9 +31,11 @@ class DatabaseService {
         
  await copyDatabaseFromAssets(); 
   final databasesPath = await getDatabasesPath();
-  final pathName = '$databasesPath/siratemustaqeem-db.db';
-
-  return Right(await openDatabase(pathName));
+  final pathName = '$databasesPath/db.db';
+   final db = await openDatabase(pathName);
+    await DatabaseTable.cachedDataFromDb(db, context);
+    
+  return Right(db);
 
     // try {
     //   final databasesPath = await getDatabasesPath();
@@ -68,6 +71,8 @@ class DatabaseService {
   if (await File(pathName).exists()) return;
   ByteData data = await rootBundle.load('assets/db/db.db');
   List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  // make print check if have a data ?
+    
   await File(pathName).writeAsBytes(bytes);
 }
 

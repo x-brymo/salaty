@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:salaty/src/core/localization/app_localizations.dart';
 
 import '../../../../routes/routes.dart';
 import '../../../core/util/constants.dart';
@@ -43,7 +44,7 @@ class KiblatCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      'Sirate Mustaqeem',
+                      context.tr('title'),
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
@@ -64,7 +65,7 @@ class KiblatCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Current Location',
+                      context.tr("current_location"),
                     ),
                     TextButton(
                       onPressed: () {
@@ -73,7 +74,7 @@ class KiblatCard extends StatelessWidget {
                             builder: (context) => ComingSoonDialog());
                       },
                       child: Text(
-                        'Change Location',
+                         context.tr("current_location"),
                       ),
                     )
                   ],

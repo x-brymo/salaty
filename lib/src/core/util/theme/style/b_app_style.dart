@@ -11,7 +11,7 @@ class AppStyle {
   ThemeData get currentTheme {
     if (themeIndex >= 0 && themeIndex < AppColor.availableColorSchemes.length) {
       return ThemeData(
-        fontFamily: 'MyFont',
+        fontFamily: 'Uthman',
         useMaterial3: true,
         primarySwatch: getMaterialColor(),
         colorScheme: AppColor.availableColorSchemes[themeIndex],

@@ -30,7 +30,7 @@ class CollectionButton extends StatelessWidget {
           SvgPicture.asset(
             collection.assetName,
             width: 64.w,
-            color: Theme.of(context).colorScheme.primary,
+           // color: Theme.of(context).colorScheme.primary,
           ),
           SizedBox(
             width: 64.w,
